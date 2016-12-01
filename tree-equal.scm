@@ -1,13 +1,9 @@
-(load "memq")
 
 (define tree-equal?
   (lambda (t1 t2)
-    (if (equal? (tree-labels t1) (tree-labels t2))
-      (if (leaf? t1) 
-          (if (leaf? t2) 
-              (equal? t1 t2) 
-              #f)
-           (and (equal? (node-left t1) (node-left t2))
-                (equal? (node-right t1) (node-right t2))))
-       #f)))
-
+    (if (set-equal? (tree-labels t1) (tree-labels t2))
+	(cond ((and (leaf? t1) (leaf? t2)) #t)
+	      ((and (node? t1) (node? t2))
+		(and (tree-equal? (node-left t1) (node-left t2)) (tree-equal? (node-right t1) (node-right t2))))
+	      (else #f))
+        #f)))
