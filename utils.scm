@@ -40,3 +40,11 @@
     (and (null? (set-minus set1 set2))
          (null? (set-minus set2 set1)))))
 
+(define create-label (lambda (l)
+       (string->symbol (symbol-append-reverse l))))
+
+(define symbol-append-reverse (lambda (los)
+       (if (null? los)
+           ""
+           (string-append (symbol-append-reverse (cdr los))
+                          (symbol->string (car los))))))
