@@ -1,3 +1,11 @@
+(define create-label (lambda (l)
+       (string->symbol (symbol-append-reverse l))))
+
+(define symbol-append-reverse (lambda (los)
+       (if (null? los)
+           ""
+           (string-append (symbol-append-reverse (cdr los))
+                          (symbol->string (car los))))))
 
 (define the-edge-tag 'edge)
 (define the-vertex-tag 'vertex)
@@ -9,10 +17,6 @@
 (define make-edge
   (lambda (v1 v2)
     (list the-edge-tag v1 v2)))
-
-(define vertex-labels cddr)
-(define vertex-id cadr)
-(define edge-vertices cdr)
 
 (define tree-to-graph
   (lambda (t)
