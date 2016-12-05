@@ -1,3 +1,8 @@
+;;; Coursework 2
+;;; Question 04
+;;; Bogdan Buduroiu (bb4g15@soton.ac.uk)
+
+;;; solution:
 (define create-label (lambda (l)
        (string->symbol (symbol-append-reverse l))))
 
@@ -31,3 +36,12 @@
 	(list (make-edge (create-label l) (create-label (append (list 'l) l))))
 	(list (make-edge (create-label l) (create-label (append (list 'r) l))))
 	(tree-to-graph-acc (node-left t) (append (list 'l) l)) (tree-to-graph-acc (node-right t) (append (list 'r) l))))))
+
+;;; My solution uses an accumulator to pass the id to each new vertex and
+;;; edge.
+;;; I implemented my own methods of making vertices and edges.
+;;; (make-vertex and make-edge).
+
+;;; The solution creates the vertex corresponding to the current node and
+;;; the edges to it's children. It then recursively calls itself on the
+;;; left and right subtree.
