@@ -18,12 +18,7 @@
 
 (define remove-labels
   (lambda (l tree)
-    (letrec ((f (lambda (label)
-	       (cond ((null? label) '())
-		     ((memq? (car label) l) (f (cdr label)))
-		     (else (cons (car label) (f (cdr label))))))))
-	(tree-map f tree))))
-
+    (tree-map (lambda (lab) (set-minus lab l)) tree)))
 ;;; tree-map recreates the original tree, with labels the result of
 ;;; the application of function f on the current labels
 
